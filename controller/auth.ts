@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Response } from "express";
+import { Request, Response } from "express";
 
 import redisClient from "../bin/redis";
 import { externalApi, nodeEnv, refreshTokenExpirySeconds } from "../config/env";
@@ -24,6 +24,13 @@ const login = async (req: LoginRequest, res: Response) => {
   }
 };
 
+const logout = (req: Request, res: Response) => {
+  res.clearCookie("accessToken");
+  res.clearCookie("refreshToken");
+
+  res.status(200).json({ success: true });
+};
+
 const refreshAccessToken = async (req: RefreshTokenRequest, res: Response) => {
   try {
     const refreshToken = req.cookies.refreshToken;
@@ -39,6 +46,9 @@ const refreshAccessToken = async (req: RefreshTokenRequest, res: Response) => {
 
     res.status(200).json({ success: true });
   } catch (e) {
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
+
     res.status(403).json({ message: "Invalid refresh token." });
   }
 };
@@ -47,4 +57,4 @@ const updateTokenCookie = (res: Response, key: string, value: string) => {
   res.cookie(key, value, { httpOnly: true, secure: nodeEnv === "production", sameSite: "strict" });
 };
 
-export { login, refreshAccessToken };
+export { login, logout, refreshAccessToken };

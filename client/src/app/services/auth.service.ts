@@ -18,6 +18,12 @@ export class AuthenticationService {
     this.user = this.userSubject.asObservable();
   }
 
+  clearSession() {
+    localStorage.removeItem("user");
+    this.userSubject.next(null);
+    this.router.navigate([LOGIN_PATH]);
+  }
+
   login$(username: string, password: string) {
     return this.http
       .post<User>("/api/account/login", {
@@ -34,10 +40,10 @@ export class AuthenticationService {
       );
   }
 
-  logout() {
-    localStorage.removeItem("user");
-    this.userSubject.next(null);
-    this.router.navigate([LOGIN_PATH]);
+  logout$() {
+    return this.http
+      .post<User>("/api/account/logout", {})
+      .pipe(map(() => this.clearSession()));
   }
 
   refreshAccessToken$() {
