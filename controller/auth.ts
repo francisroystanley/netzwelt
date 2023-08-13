@@ -37,7 +37,7 @@ const refreshAccessToken = async (req: RefreshTokenRequest, res: Response) => {
     const accessToken = signToken(JSON.parse(user));
     updateTokenCookie(res, "accessToken", accessToken);
 
-    res.status(200);
+    res.status(200).json({ success: true });
   } catch (e) {
     res.status(403).json({ message: "Invalid refresh token." });
   }

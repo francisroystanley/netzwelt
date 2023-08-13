@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       next: () => {
         this.router.navigate([BASE_PATH]);
       },
-      error: ({ error }) => {
+      error: (error) => {
         this.error = error.message;
         this.loading = false;
       },
