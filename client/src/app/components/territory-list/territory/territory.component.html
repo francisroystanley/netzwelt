@@ -1,0 +1,20 @@
+<li class="list-group-item border-0 py-0">
+  <div class="py-1" *ngIf="!territory.children?.length">
+    {{ territory.name }}
+  </div>
+  <ng-container *ngIf="territory.children?.length">
+    <div
+      class="py-1 pointer"
+      [ngClass]="{ collapsed: isCollapsed }"
+      (click)="collapse.toggle()"
+    >
+      {{ territory.name }}
+    </div>
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+      <app-territory
+        *ngFor="let item of territory.children"
+        [territory]="item"
+      />
+    </div>
+  </ng-container>
+</li>
