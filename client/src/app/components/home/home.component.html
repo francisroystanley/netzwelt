@@ -1,3 +1,4 @@
 <h2>Territories</h2>
 <p>Here are the list of territories</p>
-<app-territory-list [territories]="territories" />
+<p *ngIf="loading">Loading...</p>
+<app-territory-list *ngIf="!loading" [territories]="territories" />
