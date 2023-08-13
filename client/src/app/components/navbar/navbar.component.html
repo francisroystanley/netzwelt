@@ -3,36 +3,45 @@
     <a class="navbar-brand" routerLink="/">
       <img src="assets/logo.png" alt="Netzwelt" height="40" />
     </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      (click)="collapse.toggle()"
-      [attr.aria-expanded]="!isCollapsed"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div
-      class="navbar-collapse"
-      #collapse="ngbCollapse"
-      [(ngbCollapse)]="isCollapsed"
-    >
-      <ul class="navbar-nav w-100 mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">
-            Home
-          </a>
-        </li>
-        <div class="d-flex ms-lg-auto">
-          <li ngbDropdown display="dynamic" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" role="button" ngbDropdownToggle>
-              Hello!
+    <ng-container *ngIf="user">
+      <button
+        class="navbar-toggler"
+        type="button"
+        (click)="collapse.toggle()"
+        [attr.aria-expanded]="!isCollapsed"
+        *ngIf="user"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="navbar-collapse"
+        #collapse="ngbCollapse"
+        [(ngbCollapse)]="isCollapsed"
+      >
+        <ul class="navbar-nav w-100 mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">
+              Home
             </a>
-            <div ngbDropdownMenu>
-              <button class="dropdown-item" (click)="onLogout()">Logout</button>
-            </div>
           </li>
-        </div>
-      </ul>
-    </div>
+          <div class="d-flex ms-lg-auto">
+            <li ngbDropdown display="dynamic" class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                role="button"
+                ngbDropdownToggle
+              >
+                Hello {{ user.displayName }}!
+              </a>
+              <div ngbDropdownMenu>
+                <button class="dropdown-item" (click)="onLogout()">
+                  Logout
+                </button>
+              </div>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </ng-container>
   </div>
 </nav>
