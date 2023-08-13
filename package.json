@@ -4,12 +4,16 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npm run clean && tsc",
+    "build": "npm run dev:build && npm run client:build",
     "clean:unix": "rm -rf dist/*",
     "clean:windows": "del /S /Q dist\\*",
     "clean": "npm run clean:unix || npm run clean:windows",
-    "dev": "nodemon --ignore client/ -e ts --exec npm start",
-    "prestart": "npm run build",
+    "client:build": "cd client && npm run build",
+    "client:install": "cd client && npm install",
+    "dev:build": "npm run clean && tsc",
+    "dev": "nodemon --ignore client/ -e ts --exec npm run start:dev",
+    "postinstall": "npm run client:install",
+    "start:dev": "npm run dev:build && npm start",
     "start": "node ."
   },
   "author": "Francis Roy Stanley Falcon",
@@ -21,7 +25,8 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.1",
-    "redis": "^4.6.7"
+    "redis": "^4.6.7",
+    "typescript": "^5.1.6"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",
@@ -30,7 +35,6 @@
     "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^20.4.10",
     "nodemon": "^3.0.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "ts-node": "^10.9.1"
   }
 }
