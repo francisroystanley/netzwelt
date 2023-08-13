@@ -5,10 +5,10 @@ import territoryRouter from "./territory";
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
+router.get("/api/health-check", (req: Request, res: Response) => {
   res.json({ message: "Hello World!" });
 });
 
-router.use("/", [authRouter, territoryRouter]);
+router.use("/api", [authRouter, territoryRouter]);
 
 export default router;

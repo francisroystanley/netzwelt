@@ -4,7 +4,6 @@ import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
-import { environment } from "../../environments/environment";
 import { LOGIN_PATH } from "src/constants";
 
 @Injectable({ providedIn: "root" })
@@ -20,10 +19,8 @@ export class AuthenticationService {
   }
 
   login$(username: string, password: string) {
-    const loginEndpoint = `${environment.apiUrl}/account/login`;
-
     return this.http
-      .post<User>(loginEndpoint, {
+      .post<User>("/api/account/login", {
         username,
         password,
       })
@@ -44,9 +41,7 @@ export class AuthenticationService {
   }
 
   refreshAccessToken$() {
-    const refreshTokenEndpoint = `${environment.apiUrl}/refresh-token`;
-
-    return this.http.post(refreshTokenEndpoint, {});
+    return this.http.post("/api/refresh-token", {});
   }
 
   get userValue() {
