@@ -18,10 +18,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   submitted = false;
   loginSub!: Subscription;
 
-  constructor(
-    private authSrvc: AuthenticationService,
-    private router: Router
-  ) {}
+  constructor(private authSrvc: AuthenticationService, private router: Router) {
+    if (this.authSrvc.userValue) this.router.navigate([BASE_PATH]);
+  }
 
   ngOnInit() {
     this.loginForm = new FormGroup({

@@ -48,4 +48,8 @@ export class AuthenticationService {
 
     return this.http.post(refreshTokenEndpoint, {});
   }
+
+  get userValue() {
+    return this.userSubject.value;
+  }
 }
