@@ -20,7 +20,7 @@ const login = async (req: LoginRequest, res: Response) => {
 
     res.json(user);
   } catch (err) {
-    res.status(500).json({ message: (<LoginResponseError>err).response.data.message });
+    res.status(500).json({ message: (<ResponseError>err).response.data.message });
   }
 };
 

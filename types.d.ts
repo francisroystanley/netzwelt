@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
 
 declare global {
+  type RawTerritory = {
+    id: string;
+    name: string;
+    parent: string | null;
+  };
+
   type User = {
     username: string;
     displayName: string;
@@ -14,7 +20,7 @@ declare global {
     };
   }
 
-  interface LoginResponseError extends Response {
+  interface ResponseError extends Response {
     response: {
       data: {
         message: string;
