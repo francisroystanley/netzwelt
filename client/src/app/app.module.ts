@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import {
   NgbCollapseModule,
@@ -9,6 +10,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import {
   HomeComponent,
+  LoginComponent,
   NavbarComponent,
   TerritoryComponent,
   TerritoryListComponent,
@@ -21,12 +23,14 @@ import {
     HomeComponent,
     TerritoryListComponent,
     TerritoryComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbCollapseModule,
     NgbDropdownModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
