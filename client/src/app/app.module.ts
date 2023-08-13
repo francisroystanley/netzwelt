@@ -13,6 +13,7 @@ import {
   HomeComponent,
   LoginComponent,
   NavbarComponent,
+  NotFoundComponent,
   TerritoryComponent,
   TerritoryListComponent,
 } from "./components";
@@ -25,6 +26,7 @@ import {
     TerritoryListComponent,
     TerritoryComponent,
     LoginComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
