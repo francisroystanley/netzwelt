@@ -11,3 +11,9 @@ type Territory = RawTerritory & {
 type TerritoriesMap = {
   [key: string]: Territory;
 };
+
+type User = {
+  username: string;
+  displayName: string;
+  roles: string[];
+};

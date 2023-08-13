@@ -1,19 +1,27 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
+
+import { AuthenticationService } from "../../services/auth.service";
+import { BASE_PATH } from "src/constants";
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   error = "";
   loading = false;
   loginForm!: FormGroup;
   submitted = false;
+  loginSub!: Subscription;
 
-  constructor(private router: Router) {}
+  constructor(
+    private authSrvc: AuthenticationService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -34,11 +42,22 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.invalid) return;
 
+    const { username, password } = this.loginForm.value;
     this.error = "";
     this.loading = true;
 
-    setTimeout(() => {
-      this.router.navigate(["/"]);
-    }, 1000);
+    this.loginSub = this.authSrvc.login$(username, password).subscribe({
+      next: () => {
+        this.router.navigate([BASE_PATH]);
+      },
+      error: ({ error }) => {
+        this.error = error.message;
+        this.loading = false;
+      },
+    });
+  }
+
+  ngOnDestroy() {
+    this.loginSub?.unsubscribe();
   }
 }
