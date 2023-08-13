@@ -12,6 +12,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(routes);
 
+app.use("*", (req, res) => {
+  res.status(404).json({ error: "404 - Page Not Found" });
+});
+
 app.listen(port, async () => {
   redisClient.on("error", err => console.error("Redis Client Error:", err));
 
