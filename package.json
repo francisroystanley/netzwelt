@@ -19,7 +19,7 @@
   "author": "Francis Roy Stanley Falcon",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.4.0",
+    "axios": "^1.6.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
